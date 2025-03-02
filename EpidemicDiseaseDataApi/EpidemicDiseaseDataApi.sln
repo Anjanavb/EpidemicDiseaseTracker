@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpidemicDiseaseDataApi", "EpidemicDiseaseDataApi\EpidemicDiseaseDataApi.csproj", "{5A4577D2-09FE-4FDB-A5DC-05FCD9151ECB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A4577D2-09FE-4FDB-A5DC-05FCD9151ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4577D2-09FE-4FDB-A5DC-05FCD9151ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4577D2-09FE-4FDB-A5DC-05FCD9151ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4577D2-09FE-4FDB-A5DC-05FCD9151ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E45630C-3379-4DD8-9CA3-543521327FC6}
+	EndGlobalSection
+EndGlobal
