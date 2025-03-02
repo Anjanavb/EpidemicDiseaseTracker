@@ -49,7 +49,7 @@ namespace EpidemicDiseaseTrackerAPI.Controllers
         public async Task<IActionResult>GetWeeklyCasesByDisease(int year,string diseaseName)
         {
             var cases=await _repository.GetWeeklyCasesByDiseaseNameAsync(year, diseaseName);
-            if (!cases.Any()) return NotFound("No weekly data found for the given year.");
+            if (!cases.Any()) return NotFound("No weekly data found for the given year or disease.");
             return Ok(cases);
         }
         [HttpGet("year/{year}/diseaseName")]
