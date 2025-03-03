@@ -63,7 +63,10 @@ The Epidemic Disease Tracker project consists of two APIs and a frontend applica
 6. **CORS Setup**:
    - Ensure that the `AllowOrigins` setting is updated with the correct frontend URL (e.g., `http://localhost:3000`) to allow `EpidemicDiseaseTrackerAPI` to accept requests from your React.js frontend.
 
-7. **Run the backend project** in Visual Studio:
+7. **Databse Setup**:
+   - Run the migrations available in API and run the stored procedure from DatabseScripts folder
+
+8. **Run the backend project** in Visual Studio:
    - The API will be hosted on the configured URL.
      - Example:
        - `EpidemicDiseaseDataApi`: https://localhost:7041
