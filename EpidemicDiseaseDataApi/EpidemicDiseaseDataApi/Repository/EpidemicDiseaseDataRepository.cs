@@ -7,7 +7,6 @@ namespace EpidemicDiseaseDataApi.Repository
     public class EpidemicDiseaseDataRepository : IEpidemicDiseaseDataRepository
     {
         private readonly AppDbContext _context;
-        private const int Limit = 1000;
         public EpidemicDiseaseDataRepository(AppDbContext context)
         {
             _context = context;
