@@ -21,85 +21,43 @@ namespace EpidemicDiseaseTrackerAPI.Controllers
         [HttpGet("yearly")]
         public async Task<IActionResult> GetCasesByYear()
         {
-            try
-            {
-                var cases = await _repository.GetYearlyCasesAsync();
-                if (!cases.Any()) return NotFound("No data available");
-                return Ok(cases);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An unexpected error occurred. Please try again later.");
-            }
+            var cases = await _repository.GetYearlyCasesAsync();
+            if (!cases.Any()) return NotFound("No data available");
+
+            return Ok(cases);
         }
 
 
         [HttpGet("year/{year}/weekly")]
         public async Task<IActionResult> GetCasesByYearWeekly(int year)
         {
-            try
-            {
+            var cases = await _repository.GetWeeklyCasesAsync(year);
+            if (!cases.Any()) return NotFound("No weekly data found for the given year.");
 
-                var cases = await _repository.GetWeeklyCasesAsync(year);
-                if (!cases.Any()) return NotFound("No weekly data found for the given year.");
-
-                return Ok(cases);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An unexpected error occurred. Please try again later.");
-            }
+            return Ok(cases);
         }
 
         [HttpGet("years")]
         public async Task<IActionResult>GetAvailableYears()
         {
-            try
-            {
-                var years = await _repository.GetAvailableYearsAsync();
-                if (!years.Any()) return NotFound("No years found.");
+            var years = await _repository.GetAvailableYearsAsync();
+            if (!years.Any()) return NotFound("No years found.");
 
-                return Ok(years);
-            }
-            catch(Exception ex)
-            {
-                return StatusCode(500, "An unexpected error occurred. Please try again later.");
-            }
-
+            return Ok(years);
         }
         [HttpGet("year/{year}/weekly/{diseaseName}")]
-        public async Task<IActionResult> GetWeeklyCasesByDisease(int year, string diseaseName)
+        public async Task<IActionResult>GetWeeklyCasesByDisease(int year,string diseaseName)
         {
-            
-            if (year < 2012 || year > 2022)
-                return BadRequest("Invalid year provided.");
-            if (string.IsNullOrWhiteSpace(diseaseName))
-
-                return BadRequest("Disease name cannot be empty.");
-            try
-            {
-                var cases = await _repository.GetWeeklyCasesByDiseaseNameAsync(year, diseaseName);
-                if (!cases.Any()) return NotFound("No weekly data found for the given year or disease.");
-                return Ok(cases);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An unexpected error occurred. Please try again later.");
-            }
+            var cases=await _repository.GetWeeklyCasesByDiseaseNameAsync(year, diseaseName);
+            if (!cases.Any()) return NotFound("No weekly data found for the given year or disease.");
+            return Ok(cases);
         }
         [HttpGet("year/{year}/diseaseName")]
         public async Task<IActionResult> GetDiseasesForYear(int year)
         {
-            try
-            {
-                var diseases = await _repository.GetDiseasesForYearAsync(year);
-                if (!diseases.Any()) return NotFound("No diseases found for the given year.");
-                return Ok(diseases);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "An unexpected error occurred. Please try again later.");
-            }
+            var diseases = await _repository.GetDiseasesForYearAsync(year);
+            if (!diseases.Any()) return NotFound("No diseases found for the given year.");
+            return Ok(diseases);
         }
     }
 }

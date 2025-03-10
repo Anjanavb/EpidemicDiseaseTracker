@@ -14,16 +14,16 @@ namespace EpidemicDiseaseDataApi.DTOs
 
     public class Record
     {
-        [JsonProperty("epi_week")]
+        [JsonProperty("epi_week")] // Map to epi_week in JSON
         public string EpiWeek { get; set; }
 
-        [JsonProperty("disease")] 
+        [JsonProperty("disease")] // Map to disease in JSON
         public string Disease { get; set; }
 
-        [JsonProperty("no._of_cases")] 
+        [JsonProperty("no._of_cases")] // Map to no._of_cases in JSON
         public string NoOfCases { get; set; }
 
-        [JsonProperty("_id")] 
+        [JsonProperty("_id")] // Map to _id in JSON
         public int Id { get; set; }
     }
 

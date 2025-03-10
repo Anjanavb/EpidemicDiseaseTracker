@@ -14,7 +14,7 @@ public class DiseaseDataController : ControllerBase
         _apiRepository = apiRepository;
     }
 
-    [HttpPost]
+    [HttpGet]
     public async Task<IActionResult> FetchAndInsertData()
     {
         try
