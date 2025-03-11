@@ -16,6 +16,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  Scale,
 } from "chart.js";
 
 // Register Chart.js components
@@ -37,9 +38,60 @@ export class Dashboard extends Component {
     selectedDisease: "All",
     yearlyChartData: { labels: [], datasets: [] },
     weeklyChartData: { labels: [], datasets: [] },
-    yearlyChartOptions: { plugins: { legend: { display: false } } }, 
-    weeklyChartOptions: { plugins: { legend: { display: false } } },
+    yearlyChartOptions: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Year",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Cases Reported",
+          },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      },
+    },
+    weeklyChartOptions: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: "top",
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Week",
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Cases Reported",
+          },
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      },
+    },
     error: "",
+    searchDisease: "",
   };
 
   async componentDidMount() {
@@ -128,12 +180,10 @@ export class Dashboard extends Component {
 
       this.setState({
         weeklyChartData: {
-          labels: weeks.map(week => `W${week.slice(-2)}`),
+          labels: weeks.map((week) => `W${week.slice(-2)}`),
           datasets: [
             {
-              label: `Cases in ${year} ${
-                disease !== "All" ? `(${disease})` : ""
-              }`,
+              label: `Cases in ${year} ${disease !== "All" ? `(${disease})` : ""}`,
               data: cases,
               backgroundColor: "rgba(255, 99, 132, 0.5)",
               borderColor: "rgba(255, 99, 132, 1)",
@@ -168,6 +218,11 @@ export class Dashboard extends Component {
     const selectedDisease = event.target.value;
     this.setState({ selectedDisease });
     await this.loadWeeklyData(this.state.selectedYear, selectedDisease);
+  };
+
+  handleDiseaseSearch = async (event) => {
+    const searchDisease = event.target.value;
+    this.setState({ searchDisease });
   };
 
   handleRetry = async () => {
@@ -213,18 +268,32 @@ export class Dashboard extends Component {
               <label>Select Year: </label>
               <select value={this.state.selectedYear} onChange={this.handleYearChange}>
                 {this.state.years.map((year) => (
-                  <option key={year} value={year}>{year}</option>
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
                 ))}
               </select>
 
               {this.state.selectedYear && this.state.diseases.length > 0 && (
                 <div className="dropdown-section">
+                  <input
+                    type="text"
+                    placeholder="Search Disease"
+                    value={this.state.searchDisease}
+                    onChange={this.handleDiseaseSearch}
+                  />
                   <label>Select Disease: </label>
                   <select value={this.state.selectedDisease} onChange={this.handleDiseaseChange}>
                     <option value="All">All</option>
-                    {this.state.diseases.map((disease) => (
-                      <option key={disease} value={disease}>{disease}</option>
-                    ))}
+                    {this.state.diseases
+                      .filter((disease) =>
+                        disease.toLowerCase().includes(this.state.searchDisease.toLowerCase())
+                      )
+                      .map((disease) => (
+                        <option key={disease} value={disease}>
+                          {disease}
+                        </option>
+                      ))}
                   </select>
                 </div>
               )}
